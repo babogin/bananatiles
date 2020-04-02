@@ -4,13 +4,7 @@ import styled from 'styled-components';
 import Pile from './Components/Pile.js';
 import Board from './Components/Board.js';
 
-const GameWrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
-    margin: 0
-`
-
-function App() {
+const App = () => {
   return (
     <GameWrapper className="App">
       <Board></Board>
@@ -20,3 +14,9 @@ function App() {
 }
 
 export default App;
+
+const GameWrapper = styled.div`
+    width: 100vw;
+    height: 100vh;
+    margin: 0
+`

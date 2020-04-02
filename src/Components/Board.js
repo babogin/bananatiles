@@ -2,6 +2,45 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Square from './Square'
 
+const Board = (props) =>  {
+  //move to state storage / placeholder
+  const letter = "A"
+  const rowWidth = 8
+  const rowsCount = 8
+
+  const [boardTiles,setBoardTiles] = useState(null)
+
+  useEffect(() => {
+    createBoard()
+  },[])
+
+  const createBoard = () => {
+    const rows = []
+    for (let i = 0; i < rowsCount; i++) {
+      let squares = []  
+      for (let j = 0; j < rowWidth; j++){
+        //each square will probably be an object with letter and more info?
+        squares.push(letter)
+      }
+      rows.push(squares)
+    }
+    setBoardTiles(rows)
+  }
+
+  return (
+    <BoardWrapper>
+        {boardTiles && boardTiles.map((row,i) => (
+          row.map((square,j) => ( 
+            <div key={`row${i}column${j}`} style={{ width: '12%', height: '12%', margin: '.25%' }}>
+              <Square letter={square}></Square>
+            </div>
+          ))))}
+    </BoardWrapper>
+  )
+}
+
+export default Board;
+
 const BoardWrapper = styled.div`
     width: 50%;
     height: 60vh;
@@ -11,31 +50,6 @@ const BoardWrapper = styled.div`
     border: 1px solid black;
 `
 
-function renderSquare(i) {
-    const letter = "A"
-  
-    return (
-      <div key={i} style={{ width: '12%', height: '12%', margin: '.25%' }}>
-        <Square letter={letter}></Square>
-      </div>
-    )
-  }
-
-export default function Board(props) {
-    const squares = []
-  for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i))
-  }
-
-  return (
-    <React.Fragment>
-        <BoardWrapper style={{
-      }}>
-            {squares}
-        </BoardWrapper>
-    </React.Fragment>
-);
-}
 
 // const squares = []
 // const letters = ['J','J','K','K','Q','Q','X','X','Z','Z','B','B','B','C','C','C','F','F','F','H','H','H','M','M','M','P','P','P','V','V','V','W','W','W','Y','Y','Y','G','G','G','G','L','L','L','L','L','D','D','D','D','D','D','S','S','S','S','S','S','U','U','U','U','U','U','N','N','N','N','N','N','N','N','T','T','T','T','T','T','T','T','T','R','R','R','R','R','R','R','R','R','O','O','O','O','O','O','O','O','O','O','O','I','I','I','I','I','I','I','I','I','I','I','I','A','A','A','A','A','A','A','A','A','A','A','A','A','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E','E']

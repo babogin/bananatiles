@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Tile from './Tile.js'
 
-const PileWrapper = styled.div`
-    height: 33vh;
-    border: 1px solid black;
-`
-
-
-export default function Pile(props) {
+const Pile = (props) => {
 
   return (
     <React.Fragment>
@@ -18,3 +12,10 @@ export default function Pile(props) {
     </React.Fragment>
 );
 }
+
+export default Pile;
+
+const PileWrapper = styled.div`
+    height: 33vh;
+    border: 1px solid black;
+`

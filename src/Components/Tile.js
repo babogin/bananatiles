@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+const Tile = (props) => {
+
+  return (
+    <TileWrapper>
+        {props.letter}
+    </TileWrapper>
+    );
+}
+
+export default Tile;
+
+
 const TileWrapper = styled.div`
     padding: 15px;
     border: 1px solid black;
@@ -8,15 +20,3 @@ const TileWrapper = styled.div`
     height: 50px;
     background-color: #bbb;
 `
-
-
-export default function Tile(props) {
-
-  return (
-    <React.Fragment>
-        <TileWrapper>
-            {props.letter}
-        </TileWrapper>
-    </React.Fragment>
-);
-}
