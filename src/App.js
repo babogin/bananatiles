@@ -1,13 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Tile from './Tile.js';
+import styled from 'styled-components';
+import Pile from './Components/Pile.js';
+import Board from './Components/Board.js';
+
+const GameWrapper = styled.div`
+    width: 100vw;
+    height: 100vh;
+    margin: 0
+`
 
 function App() {
   return (
-    <div className="App">
-      <Tile letter={"A"}></Tile>
-    </div>
+    <GameWrapper className="App">
+      <Board></Board>
+      <Pile></Pile>
+    </GameWrapper>
   );
 }
 
