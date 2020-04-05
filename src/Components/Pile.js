@@ -52,28 +52,31 @@ const Pile = ({ snapToGrid }) => {
       setBoxes(boxesCopy)
     }
 
-    const moveBox = useCallback(
-      (id, left, top) => {
-        setBoxes(
-          update(boxes, {
-            [id]: {
-              $merge: { left, top }
-            }
-          })
-        );
-      },
-      [boxes]
-    );
+    const moveBox = 
+      (id, left, top, title) => {
+        let boxesCopy = {...boxes}
+        boxesCopy[id] = {title , left, top}
+        setBoxes(boxesCopy)
+      };
 
     const [, drop] = useDrop({
       accept: [ItemTypes.LETTER,ItemTypes.BOARD_LETTER],
       drop(item, monitor) {
-        const delta = monitor.getDifferenceFromInitialOffset();
-        let left = Math.round(item.left + delta.x);
-        let top = Math.round(item.top + delta.y);
-        [left, top] = doSnapToGrid(left, top);
-        moveBox(item.id, left, top);
-        return undefined;
+        if (item.type === ItemTypes.BOARD_LETTER){
+          let pos = monitor.getClientOffset()
+          console.log(pos);
+          let [left, top] = doSnapToGrid(pos.x,pos.y)
+          console.log(item.id,left,top,item.title);
+            
+          moveBox(item.id, left, top, item.title);
+
+        } else {
+          const delta = monitor.getDifferenceFromInitialOffset();
+          let left = Math.round(item.left + delta.x);
+          let top = Math.round(item.top + delta.y);
+          [left, top] = doSnapToGrid(left, top);
+          moveBox(item.id, left, top, item.title);
+        }
       },
       end(item, monitor) {
         return {dropTarget: 'pile'}
