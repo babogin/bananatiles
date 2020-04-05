@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Square from './Square'
 
+
 const Board = (props) =>  {
   //move to state storage / placeholder
   const letter = "A"
@@ -13,6 +14,8 @@ const Board = (props) =>  {
   useEffect(() => {
     createBoard()
   },[])
+
+  
 
   const createBoard = () => {
     const rows = []
@@ -47,7 +50,6 @@ const BoardWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 5vh;
-    border: 1px solid black;
 `
 
 

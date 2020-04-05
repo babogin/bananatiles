@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDrag } from 'react-dnd'
-import { getEmptyImage } from 'react-dnd-html5-backend'
 import Tile from './Tile'
+import {ItemTypes} from '../constants'
+
 function getStyles(left, top, isDragging) {
   const transform = `translate3d(${left}px, ${top}px, 0)`
   return {
@@ -14,17 +15,27 @@ function getStyles(left, top, isDragging) {
     height: isDragging ? '' : '',
   }
 }
+
 const DraggableBox = (props) => {
-  const { id, title, left, top } = props
+  const { id, title, left, top, deleteFunc } = props
   const [{ isDragging }, drag] = useDrag({
-    item: { type: 'box', id, left, top, title },
+    item: { type: ItemTypes.LETTER, id, left, top, title },
+    end: (item, monitor) => {
+      if (monitor.didDrop()){
+        let dropResult = monitor.getDropResult();
+      
+        if (dropResult.dropTarget === 'pile'){
+            //do nothing for now
+        } else if (dropResult.dropTarget === 'square'){
+          deleteFunc(id)
+        }
+      }
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
-  useEffect(() => {
-    
-  }, [])
+  
   return (
     <div ref={drag} style={getStyles(left, top, isDragging)}>
       <Tile title={title} />
