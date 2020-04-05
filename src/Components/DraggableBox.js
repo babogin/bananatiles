@@ -10,20 +10,20 @@ function getStyles(left, top, isDragging) {
     WebkitTransform: transform,
     // IE fallback: hide the real node using CSS when dragging
     // because IE will ignore our custom "empty image" drag preview.
-    opacity: isDragging ? 0 : 1,
-    height: isDragging ? 0 : '',
+    opacity: isDragging ? 0.8 : 1,
+    height: isDragging ? '' : '',
   }
 }
 const DraggableBox = (props) => {
   const { id, title, left, top } = props
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
     item: { type: 'box', id, left, top, title },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
   useEffect(() => {
-    preview(getEmptyImage(), { captureDraggingState: true })
+    
   }, [])
   return (
     <div ref={drag} style={getStyles(left, top, isDragging)}>
