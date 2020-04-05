@@ -5,7 +5,7 @@ const Tile = (props) => {
 
   return (
     <TileWrapper>
-        {props.letter}
+        {props.title}
     </TileWrapper>
     );
 }
@@ -19,4 +19,5 @@ const TileWrapper = styled.div`
     width: 50px;
     height: 50px;
     background-color: #bbb;
+    cursor: move;
 `
