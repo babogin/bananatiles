@@ -66,7 +66,7 @@ const Pile = ({ snapToGrid }) => {
     );
 
     const [, drop] = useDrop({
-      accept: ItemTypes.LETTER,
+      accept: [ItemTypes.LETTER,ItemTypes.BOARD_LETTER],
       drop(item, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
         let left = Math.round(item.left + delta.x);
